@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Friendlist extends AsynchroonRequestHandler{
 
@@ -18,8 +19,12 @@ public class Friendlist extends AsynchroonRequestHandler{
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
         Person man =  (Person) session.getAttribute("user");
-        String quoteJSON = toJSON(man.getVriendenlijst());
+        String quoteJSON = friendsToJSON(man.getVriendenlijst().getAllFriends());
         return quoteJSON;
+    }
+    public String friendsToJSON (List<Person> vrienden) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.writeValueAsString(vrienden);
     }
 
     public String toJSON (MakingFriends friend) throws JsonProcessingException {

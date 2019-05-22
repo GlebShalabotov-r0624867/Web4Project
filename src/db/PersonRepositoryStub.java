@@ -31,6 +31,7 @@ public class PersonRepositoryStub implements PersonRepository {
 
         jan.setVriendenlijst(list);
 
+
     }
 
     public Person get(String personId) {

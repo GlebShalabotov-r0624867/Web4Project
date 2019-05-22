@@ -38,9 +38,9 @@ function getFriendsData() {
 
     if (friendlistRequest.status == 200) {
         if (friendlistRequest.readyState = 4) {
-            var friendList = document.getElementById("friendList");
-            var json = JSON.parse(friendlistRequest.responseText);
 
+            var json = JSON.parse(friendlistRequest.responseText);
+            var friendList = document.getElementById("friendList");
 
             if (friendList.childNodes.length > 2) {
                 while (friendList.childNodes[2] != null) {
@@ -48,24 +48,24 @@ function getFriendsData() {
                 }
             }
 
-            for (var i = 0; i < json.friends.length; i++) {
+            for (var i = 0; i < json.length; i++) {
                 let tablerow = document.createElement('tr');
-                let nametext = document.createTextNode(json.friends[i].name);
+                let nametext = document.createTextNode(json[i].firstName);
                 let tdname = document.createElement('td');
                 tdname.className="user";
-                tdname.id =json.friends[i].userid;
+                tdname.id =json[i].userId;
                 tdname.appendChild(nametext);
 
-                let statustext = document.createTextNode(json.friends[i].status);
+                let statustext = document.createTextNode(json[i].status);
                 let tdstatus = document.createElement('td');
-                tdstatus.className = json.friends[i].status;
+                tdstatus.className = json[i].status;
                 tdstatus.appendChild(statustext);
                 tablerow.appendChild(tdname);
                 tablerow.appendChild(tdstatus);
                 friendList.appendChild(tablerow);
 
             }
-            setTimeout(getFriendList, 2000)
+            setTimeout(getFriendList, 2000);
         }
     }
 }

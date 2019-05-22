@@ -1,11 +1,15 @@
 package controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import domain.Bericht;
 import domain.Person;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class AddFriendo extends AsynchroonRequestHandler {
     @Override
@@ -16,4 +20,6 @@ public class AddFriendo extends AsynchroonRequestHandler {
         getPersonService().addNewFriend(man, newFriendo);
         return newFriendo;
     }
+
+
 }
