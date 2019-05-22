@@ -1,0 +1,139 @@
+@CHARSET "UTF-8";
+
+header > img{
+    width: 100%;
+}
+
+changeStatusInput{
+    display:  inline-block;
+}
+
+html {
+    background-image: url("../images/background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+body {
+    background-color: rgba(255,255,255,0.4);
+}
+
+/*
+.hidden{
+    visibility:hidden;
+}
+
+super mooie blog css */
+
+.commentBox:nth-child(odd){
+    background: blue;
+}
+
+.commentBox:nth-child(even){
+    background: #eeeeee;
+}
+
+.user:hover{
+    transition: 0.5s background-color;
+    background-color: #eeeeee;
+    color: blue;
+    cursor: pointer;
+}
+
+div.chatbox{
+    position: fixed;
+    bottom: 0;
+    width: 200px;
+    height: 250px;
+    background-color: #a80f0c;
+    transform: translate(-10%, -10%);
+    display: grid;
+    grid-template-columns: 10% 20% 40% 20% 10%;
+    grid-template-rows: 1em auto 1.6em ;
+}
+
+.chatHoofding{
+   grid-column: 1/5;
+    grid-row: 1/2;
+    /*padding: 10px;*/
+}
+
+.esc{
+    grid-column: 5/6;
+    grid-row: 1/2;
+    cursor: pointer;
+    text-align: center;
+}
+/*.hide_body{
+    background:white;
+    height:200px;
+    font-size:12px;
+    padding:15px;
+
+    grid-column: 1/6;
+    grid-row: 2/3;
+    display: grid;
+    grid-template-rows: auto auto;
+}*/
+.msg_body{
+    grid-row: 2/3;
+    grid-column: 1/6;
+    background:white;
+    overflow:auto;
+    overflow-x: hidden;
+    /*
+    display: block;
+    */
+
+
+}
+
+.msg_input{
+    grid-row: 3/4;
+    grid-column: 1/6;
+    resize: none;
+    width: auto;
+    height: auto;
+}
+.layout{
+    display: block;
+}
+/*.inline_right{
+    display: inline;
+    background:royalblue;
+    padding:5px;
+    min-height:15px;
+    margin-bottom:5px;
+    position:relative;
+    margin-left:10px;
+    border-radius:5px;
+    text-align: right;
+    overflow-wrap: break-word;
+    right: 0px;
+}*/
+.msg_right{
+    background:#d4e7fa;
+    padding:5px;
+    min-height:15px;
+    position:relative;
+    margin: 2.5px 5px 2.5px 10px;
+
+    border-radius:5px;
+    text-align: right;
+    overflow-wrap: break-word;
+
+}
+.msg_left{
+    background:seagreen;
+    padding:5px;
+    min-height:15px;
+    position:relative;
+    margin: 2.5px 10px 2.5px 5px;
+    border-radius:5px;
+    text-align: left;
+    overflow-wrap: break-word;
+
+}
+

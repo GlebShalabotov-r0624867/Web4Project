@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import domain.Person;
-import domain.PersonService;
+import domain.Service;
 
 public class LogIn extends RequestHandler {
 
@@ -29,10 +29,12 @@ public class LogIn extends RequestHandler {
 		}
 		
 		if (errors.size() == 0) {
-			PersonService personService = super.getPersonService();
+			Service personService = super.getPersonService();
 			Person person = personService.getAuthenticatedUser(email, password);
 			if (person != null) {
+				person.setStatus("online");
 				createSession(person, request, response);
+				destination = "chat.jsp";
 			} else {
 				errors.add("No valid email/password");
 			}
@@ -47,6 +49,7 @@ public class LogIn extends RequestHandler {
 	
 	private void createSession(Person person, HttpServletRequest request,
 			HttpServletResponse response) {
+
 		HttpSession session = request.getSession();
 		session.setAttribute("user", person);
 	}

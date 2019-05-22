@@ -1,5 +1,7 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -12,19 +14,28 @@ import java.util.regex.Pattern;
 public class Person {
 
 	private String userId;
-	private String password;
-	private String salt;
 	private String firstName;
 	private String lastName;
+	private String password;
+	private String salt;
+
 	private Role role;
+	private String status;
+	@JsonIgnore
+	private MakingFriends vriendenlijst;
 
 	public Person(String userId, String password, String firstName,
-			String lastName,Role role) {
+				  String lastName, Role role) {
 		setUserId(userId);
 		setHashedPassword(password);
 		setFirstName(firstName);
 		setLastName(lastName);
 		setRole(role);
+		setStatus("offline");
+
+		vriendenlijst = new MakingFriends();
+		setVriendenlijst(vriendenlijst);
+
 	}
 
 	public Person(String userId, String password, String salt,
@@ -36,7 +47,11 @@ public class Person {
 		setLastName(lastName);
 		setRole(role);
 	}
+	public Person(String firstName){
+		setFirstName(firstName);
+		setStatus("offline");
 
+	}
 	public Person() {
 	}
 
@@ -47,7 +62,7 @@ public class Person {
 	public void setRole(Role role) {
 		this.role=role;
 	}
-	
+
 
 	public void setUserId(String userId) {
 		if (userId.isEmpty()) {
@@ -149,4 +164,29 @@ public class Person {
 		this.lastName = lastName;
 	}
 
+	public MakingFriends getVriendenlijst() {
+		return vriendenlijst;
+	}
+
+	public void setVriendenlijst(MakingFriends vriendenlijst) {
+		this.vriendenlijst = vriendenlijst;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public void setNewStatus(String status) {
+		setStatus(status);
+	}
+
+
+    public void addFriend(Person friendo) {
+
+		vriendenlijst.addPerson(friendo);
+    }
 }

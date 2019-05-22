@@ -3,21 +3,23 @@ package controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import domain.PersonService;
+import domain.Service;
 import domain.Person;
 import domain.Role;
 
+import java.io.IOException;
+
 public abstract class RequestHandler {
 	
-	private PersonService personService;
+	private Service personService;
 	
-	public abstract String handleRequest (HttpServletRequest request, HttpServletResponse response);
+	public abstract String handleRequest (HttpServletRequest request, HttpServletResponse response) throws IOException;
 	
-	public void setModel (PersonService personService) {
+	public void setModel (Service personService) {
 		this.personService = personService;
 	}
 
-	public PersonService getPersonService() {
+	public Service getPersonService() {
 		return personService;
 	}
 	

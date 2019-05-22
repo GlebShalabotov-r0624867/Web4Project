@@ -10,49 +10,77 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import domain.PersonService;
+import domain.Bericht;
+import domain.Person;
+import domain.Service;
 
 @WebServlet("/Controller")
 public class Controller extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	
-	private PersonService model = new PersonService();
-	private ControllerFactory controllerFactory = new ControllerFactory();
+    private static final long serialVersionUID = 1L;
 
-	public Controller() {
-		super();
-	}
+    private Service model = new Service();
+    private ControllerFactory controllerFactory = new ControllerFactory();
 
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		processRequest(request, response);
-	}
 
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		processRequest(request, response);
-	}
 
-	protected void processRequest(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+
+    public Controller() {
+        super();
+    }
+
+    protected void doGet(HttpServletRequest request,
+                         HttpServletResponse response) throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    protected void doPost(HttpServletRequest request,
+                          HttpServletResponse response) throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    protected void processRequest(HttpServletRequest request,
+                                  HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         String destination = "index.jsp";
+        RequestHandler handler = null;
+        System.out.println(action);
         if (action != null) {
-        	RequestHandler handler;
-        	try {
-        		handler = controllerFactory.getController(action, model);
-				destination = handler.handleRequest(request, response);
-        	} 
-        	catch (NotAuthorizedException exc) {
-        		List<String> errors = new ArrayList<String>();
-        		errors.add(exc.getMessage());
-        		request.setAttribute("errors", errors);
-        		destination="index.jsp";
-        	}
+            try {
+                handler = controllerFactory.getController(action, model);
+                destination = handler.handleRequest(request, response);
+
+            } catch (NotAuthorizedException exc) {
+                List<String> errors = new ArrayList<String>();
+                errors.add(exc.getMessage());
+                request.setAttribute("errors", errors);
+                destination = "index.jsp";
+            }
         }
-        RequestDispatcher view = request.getRequestDispatcher(destination);
-        view.forward(request, response);
-	}
+        else{
+            try{
+                HttpSession session = request.getSession();
+                Person man =  (Person) session.getAttribute("user");
+                request.setAttribute("user", man);
+            }catch (NullPointerException e){
+                System.out.println("no user yet");
+            }
+
+        }
+
+        if (handler instanceof AsynchroonRequestHandler) {
+            response.setContentType("application/json");
+            response.getWriter().write(destination);
+        }
+        else{
+
+            RequestDispatcher view = request.getRequestDispatcher(destination);
+            view.forward(request, response);
+
+
+        }
+    }
+
 
 }
