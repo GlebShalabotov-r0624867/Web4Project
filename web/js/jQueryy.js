@@ -14,6 +14,11 @@ $(document).ready(function () {
         if ($.inArray(userID, users) != -1)
         {
             users.splice($.inArray(userID, users), 1);
+            var ell = $('[id="chatbox-'+userID+'"] .hider')
+            if (ell.is(":hidden")){ ell.slideToggle('slow');
+
+            }else $('[id="chatbox-'+userID+'"]').remove();
+
         }
 
         users.unshift(userID);

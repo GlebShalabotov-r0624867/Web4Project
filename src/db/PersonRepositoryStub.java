@@ -29,8 +29,15 @@ public class PersonRepositoryStub implements PersonRepository {
         list.addPerson(administrator);
         list.addPerson(an);
 
-        jan.setVriendenlijst(list);
+        MakingFriends list2 = new MakingFriends();
+        list2.addPerson(jan);
 
+        MakingFriends list3 = new MakingFriends();
+        list3.addPerson(jan);
+
+        jan.setVriendenlijst(list);
+        administrator.setVriendenlijst(list2);
+        an.setVriendenlijst(list3);
 
     }
 

@@ -65,7 +65,7 @@ function getFriendsData() {
                 friendList.appendChild(tablerow);
 
             }
-            setTimeout(getFriendList, 2000);
+            setTimeout(getFriendList, 3000);
         }
     }
 }
@@ -96,7 +96,7 @@ function getStatusData() {
                 quoteParagraph.appendChild(textStatus);
             }
             //polling
-            setTimeout(getStatus, 2000);
+            setTimeout(getStatus, 2500);
 
 
             //probleem, hoe haal ik nu mijn status uit mijn html en moet ik het doorsturen naa rmijn servlet

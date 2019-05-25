@@ -13,11 +13,18 @@ public class MakingFriends {
     }
 
     public  void addPerson( Person person ){
-        lijst.add(person);
+        if (! alreadyFriends(person)) lijst.add(person);
     }
 
     public Person get(int plaats) {
         return lijst.get(plaats);
+    }
+
+    public boolean alreadyFriends(Person person ){
+        for(Person p:lijst){
+            if (p.getUserId().equals(person.getUserId())) return true;
+        }
+        return false;
     }
 
 

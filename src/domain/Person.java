@@ -187,6 +187,7 @@ public class Person {
 
     public void addFriend(Person friendo) {
 
-		vriendenlijst.addPerson(friendo);
+			vriendenlijst.addPerson(friendo);
+
     }
 }
